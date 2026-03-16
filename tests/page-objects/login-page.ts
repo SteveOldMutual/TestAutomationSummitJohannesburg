@@ -1,17 +1,19 @@
 import { expect, Locator, Page } from '@playwright/test';
+import { PageObject } from './page-object';
 
-export interface LoginCredentials {
+export interface ILoginCredentials {
   username: string;
   password: string;
 }
 
-export class LoginPage {
+export class LoginPage extends PageObject {
   usernameTextbox: Locator;
   passwordTextbox: Locator;
   submitButton: Locator;
   dashboardHeading: Locator;
 
-  constructor(private readonly page: Page) {
+  constructor(page: Page) {
+    super(page);
     this.usernameTextbox = page.getByRole('textbox', { name: 'Username' });
     this.passwordTextbox = page.getByRole('textbox', { name: 'Password' });
     this.submitButton = page.getByRole('button', { name: 'Submit' });
@@ -22,7 +24,7 @@ export class LoginPage {
     await this.page.goto('/');
   }
 
-  async login(credentials: LoginCredentials) {
+  async login(credentials: ILoginCredentials) {
     await this.usernameTextbox.fill(credentials.username);
     await this.passwordTextbox.fill(credentials.password);
     await this.submitButton.click();

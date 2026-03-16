@@ -1,35 +1,38 @@
 import { expect, Locator, Page } from '@playwright/test';
+import { PageObject } from './page-object';
 
-export interface StudentDetails {
+export interface IStudentDetails {
     firstName: string;
     lastName: string;
     age: string;
     grade: string;
 }
 
-export class StudentsPage {
+export class StudentsPage extends PageObject {
     addButton: Locator;
     firstNameTextbox: Locator;
     lastNameTextbox: Locator;
     ageSpinbutton: Locator;
     gradeSpinbutton: Locator;
     submitButton: Locator;
-    rowLocator: (student: StudentDetails) => Locator;
 
-    constructor(private readonly page: Page) {
+    constructor(page: Page) {
+        super(page);
         this.addButton = page.getByRole('button', { name: 'Add' });
         this.firstNameTextbox = page.getByRole('textbox', { name: 'FirstName' });
         this.lastNameTextbox = page.getByRole('textbox', { name: 'LastName' });
         this.ageSpinbutton = page.getByRole('spinbutton', { name: 'Age' });
         this.gradeSpinbutton = page.getByRole('spinbutton', { name: 'Grade' });
         this.submitButton = page.getByRole('button', { name: 'Submit' });
-        this.rowLocator = (student: StudentDetails) =>
-            page.getByRole('row', {
-                name: `${student.firstName} ${student.lastName} ${student.age} ${student.grade}`,
-            });
     }
 
-    async addStudent(student: StudentDetails) {
+    private studentRow(student: IStudentDetails): Locator {
+        return this.page.getByRole('row', {
+            name: `${student.firstName} ${student.lastName} ${student.age} ${student.grade}`,
+        });
+    }
+
+    async addStudent(student: IStudentDetails) {
         await this.addButton.click();
         await this.firstNameTextbox.fill(student.firstName);
         await this.lastNameTextbox.fill(student.lastName);
@@ -38,7 +41,7 @@ export class StudentsPage {
         await this.submitButton.click();
     }
 
-    async expectStudentInTable(student: StudentDetails) {
-        await expect(this.rowLocator(student)).toBeVisible();
+    async expectStudentInTable(student: IStudentDetails) {
+        await expect(this.studentRow(student)).toBeVisible();
     }
 }

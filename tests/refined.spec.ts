@@ -10,7 +10,7 @@ test('Login and create a student, student should be visible in students table af
   };
 
   await app.loginPage.visit();
-  await app.loginPage.login({ username: 'User1', password: 'Password@1234' });
+  await app.loginPage.login({ username: process.env.APP_USERNAME!, password: process.env.APP_PASSWORD! });
   await app.loginPage.expectLoggedIn();
 
   await app.dashboardPage.openStudents();

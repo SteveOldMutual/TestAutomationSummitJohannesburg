@@ -45,4 +45,42 @@ Not everything we want has been added to this skill, there are still some flaws 
 
 That doesn't mean our job is done, we should still review the generated pages, ensure it has created nice reusable codeblocks, and that the locators have not been changed or hallucinated.
 
-Try running the test - does it pass? It likely wont, as the script was generated out of the context of the app and there are issues that the codegen script did not cater for.
+Try running the test - does it pass? Often it wont, as the script was generated out of the context of the app and there are issues that the codegen script did not cater for.
+
+In this example if the application isn't locally hosted, even the ~200ms response time of `/api/UserManagement/getSchoolId` will result in a race condition where playwright will act before the app has registered which school is being worked on!
+
+
+## Reviewing Scripts with Copilot
+`./.agents/skills/reviewing-page-objects/SKILL.md`
+
+This skill should have all the must-haves and best practices of your organisation. In the example we are looking at today we have purposefully left some of the best practices out of the page-object-modelling skill to allow the demonstration of the reviewer.
+
+Lets prompt something simple:
+```
+review my page object model
+```
+
+Copilot will output something like `Let me read the review skill and all current POM files simultaneously.` and begin a live code review. 
+
+Summary Table
+#	File	Issue	Severity
+1	All page objects	No base PageObject class / no super(page)	Medium
+2	refined.spec.ts	Hardcoded credentials	High
+3	login-page.ts, students-page.ts	Interface naming missing I prefix	Low
+4	dashboard-page.ts	Assertion inside action method	Medium
+5	students-page.ts	rowLocator is a function property, not a Locator	Medium
+
+The outcome of our review will look something like this, mostly naming conventions and a missing shared pageobject class which all our pages should inherit.
+The high risk is the hard coded credentials - we should be using .env to protect these.
+
+We can ask copilot to apply these fixes for us or make the changes ourselves.
+
+At the time of writing copilot made the change to use dotenv - but it didnt offer to install the library!
+This SHOULD be in your project already, but if this is a first time doing automation make sure to install dotenv use it to protect sensitive inputs by adding .env to your .gitignore
+
+[dotenv](https://www.npmjs.com/package/dotenv)
+`npm install dotenv`
+
+Uncomment line 7-9 in the playwright.config.ts
+
+

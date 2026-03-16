@@ -1,14 +1,15 @@
-import { expect, Locator, Page } from '@playwright/test';
+import { Locator, Page } from '@playwright/test';
+import { PageObject } from './page-object';
 
-export class DashboardPage {
+export class DashboardPage extends PageObject {
   studentsLink: Locator;
 
-  constructor(private readonly page: Page) {
+  constructor(page: Page) {
+    super(page);
     this.studentsLink = page.getByRole('link', { name: 'Students' });
   }
 
   async openStudents() {
-    await expect(this.studentsLink).toBeVisible();
     await this.studentsLink.click();
   }
 }
