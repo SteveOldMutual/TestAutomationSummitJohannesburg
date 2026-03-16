@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "playwright-best-practices",
+  "owner": "jovermier",
+  "repo": "cc-stack-marketplace",
+  "path": "plugins/cc-playwright/skills/playwright-best-practices",
+  "branch": "main",
+  "sha": "f060d5014030526d23fc8dfb4d6500965dd3fbdd",
+  "source": "manual"
+}
