@@ -80,6 +80,25 @@ export interface ICredential {
 }
 ```
 
+### Dynamic Locators
+For dynamic locators that require parameters, create methods that return a `Locator` based on input.
+
+
+
+```typescript   
+    export class StudentPage
+    {
+        rowLocator: (student: StudentDetails) => Locator;
+
+        constructor(private readonly page: Page) {
+            this.rowLocator = (student: StudentDetails) =>
+            page.getByRole('row', {
+                name: `${student.firstName} ${student.lastName} ${student.age} ${student.grade}`,
+            });
+        }
+    }
+```
+
 ### Key Components
 
 1. **Locators**: UI element references grouped by page
@@ -92,6 +111,7 @@ export interface ICredential {
 ## Application Aggregator Pattern
 
 The Application class serves as a central hub for all page objects, simplifying access and initialization.
+This should be initialized once per test and passed around as needed, often via fixtures.
 
 ```typescript
 export class Application {
@@ -124,6 +144,7 @@ export class Application {
 ## Fixtures Integration
 
 Fixtures provide the cleanest way to use Page Objects by eliminating boilerplate instantiation code.
+A Page Object Model needs to be instantiated into a fixture to be easily used across tests.
 
 ### Create Custom Fixture
 

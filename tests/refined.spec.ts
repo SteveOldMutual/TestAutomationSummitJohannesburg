@@ -1,28 +1,20 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from './fixtures/test-fixture';
 
 
-test('Login and create a student, student should be visible in students table after', async ({ page }) => {
-  await page.goto('/');
+test('Login and create a student, student should be visible in students table after', async ({ app }) => {
+  const student = {
+    firstName: 'Student1',
+    lastName: 'LastName',
+    age: '8',
+    grade: '2',
+  };
 
-  await page.getByRole('textbox', { name: 'Username' }).fill('User1');
-  await page.getByRole('textbox', { name: 'Password' }).fill('Password@1234');
-  await page.getByRole('button', { name: 'Submit' }).click();
-  await expect(page.getByRole('heading', { name: 'School Dashboard' })).toBeVisible();
+  await app.loginPage.visit();
+  await app.loginPage.login({ username: 'User1', password: 'Password@1234' });
+  await app.loginPage.expectLoggedIn();
 
-  await expect(page.getByRole('link', { name: 'Students' })).toBeVisible();
-  await page.getByRole('link', { name: 'Students' }).click();
-
-  await page.getByRole('button', { name: 'Add' }).click();
-  await page.getByRole('textbox', { name: 'FirstName' }).click();
-  await page.getByRole('textbox', { name: 'FirstName' }).fill('Student1');
-  await page.getByRole('textbox', { name: 'LastName' }).click();
-  await page.getByRole('textbox', { name: 'LastName' }).fill('LastName');
-  await page.getByRole('spinbutton', { name: 'Age' }).click();
-  await page.getByRole('spinbutton', { name: 'Age' }).fill('8');
-  await page.getByRole('spinbutton', { name: 'Grade' }).click();
-  await page.getByRole('spinbutton', { name: 'Grade' }).fill('2');
-  await page.getByRole('button', { name: 'Submit' }).click();
-
-  await expect(page.getByRole('row', { name: 'Student1 LastName 8 2' })).toBeVisible();
+  await app.dashboardPage.openStudents();
+  await app.studentsPage.addStudent(student);
+  await app.studentsPage.expectStudentInTable(student);
  
 });
