@@ -1,6 +1,20 @@
-# Workshop Introduction
+# AI-Augmented Test Automation with GitHub Copilot
 
-# main branch
+> Learn how to leverage GitHub Copilot and custom AI skills to accelerate the creation, review, and refactoring of Playwright test automation — from raw codegen scripts to production-ready Page Object Models.
+
+> In the live session we have limited time (45 minutes) and will try to cover the primary skills of generation and review, then start working on a task.
+
+> The final selenium refactor can be covered live, if there is time.
+
+## What You Will Learn
+
+- How to refine recorded Codegen scripts into clean, maintainable Playwright tests
+- How to use custom AI skills to generate Page Object Models with consistent standards
+- How to conduct AI-assisted code reviews against your organisation's best practices
+- How to migrate an existing Selenium/WebdriverIO project to Playwright using Copilot
+
+---
+
 
 ## Refine a spec into Page Object Model via Copilot
 
@@ -84,6 +98,17 @@ This SHOULD be in your project already, but if this is a first time doing automa
 `npm install dotenv`
 
 Uncomment line 7-9 in the playwright.config.ts
+
+# Task
+
+Inside `./test/raw.spec.ts` you will find two scripts.
+The first is the test from the demonstration, the second is for the rollcall page.
+
+Apply the concepts of generating your page object model.
+
+| # | Task | Outcome |
+| 1 | Use copilot to generate the page object model for either or both specs | A basic POM should be created
+| 2 | Utilise the review skill and your own knowledge to review and update the POM | You should have a clean and clear POM implement with 2 tests
 
 ## Refactor project type using CoPilot
 Branch= selenium-refactor-pre
