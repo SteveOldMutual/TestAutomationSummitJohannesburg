@@ -63,12 +63,14 @@ review my page object model
 Copilot will output something like `Let me read the review skill and all current POM files simultaneously.` and begin a live code review. 
 
 Summary Table
-#	File	Issue	Severity
-1	All page objects	No base PageObject class / no super(page)	Medium
-2	refined.spec.ts	Hardcoded credentials	High
-3	login-page.ts, students-page.ts	Interface naming missing I prefix	Low
-4	dashboard-page.ts	Assertion inside action method	Medium
-5	students-page.ts	rowLocator is a function property, not a Locator	Medium
+
+| # | File | Issue | Severity |
+|---|------|-------|----------|
+| 1 | All page objects | No base PageObject class / no super(page) | Medium |
+| 2 | refined.spec.ts | Hardcoded credentials | High |
+| 3 | login-page.ts, students-page.ts | Interface naming missing I prefix | Low |
+| 4 | dashboard-page.ts | Assertion inside action method | Medium |
+| 5 | students-page.ts | rowLocator is a function property, not a Locator | Medium |
 
 The outcome of our review will look something like this, mostly naming conventions and a missing shared pageobject class which all our pages should inherit.
 The high risk is the hard coded credentials - we should be using .env to protect these.
