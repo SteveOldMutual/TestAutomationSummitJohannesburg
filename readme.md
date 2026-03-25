@@ -106,9 +106,12 @@ The first is the test from the demonstration, the second is for the rollcall pag
 
 Apply the concepts of generating your page object model.
 
+Task steps
+
 | # | Task | Outcome |
-| 1 | Use copilot to generate the page object model for either or both specs | A basic POM should be created
-| 2 | Utilise the review skill and your own knowledge to review and update the POM | You should have a clean and clear POM implement with 2 tests
+|---|------|---------|
+| 1 | Use copilot to generate the page object model for either or both specs | A basic POM should be created |
+| 2 | Utilise the review skill and your own knowledge to review and update the POM | You should have a clean and clear POM implemented with 2 tests |
 
 ## Refactor project type using CoPilot
 Branch= selenium-refactor-pre
