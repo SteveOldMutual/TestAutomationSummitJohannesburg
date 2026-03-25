@@ -85,4 +85,38 @@ This SHOULD be in your project already, but if this is a first time doing automa
 
 Uncomment line 7-9 in the playwright.config.ts
 
+## Refactor project type using CoPilot
+Branch= selenium-refactor-pre
 
+Here we have a basic WebDriver.io Selenium script that does the same functionality of creating a student and asserting its creation.
+Let's assume that in a real world scenario there might be 10s or 100s of files to refactor.
+
+Using the skills we already created we can prompt copilot to refactor the code into the `./refactor` folder and then review it for best practices.
+
+```
+Using the page-object-modelling skill convert this wdio selenium project to a playwright project in the refactor folder.
+```
+
+This can result in a semi-complete status, in my case it generated a good looking POM and test but there were no fixtures.
+
+```
+Review the new playwright page objects and tests in the /refactor folder
+```
+Selenium refactor review
+
+| # | Issue | Priority |
+|---|-------|----------|
+| 1 | Create application.ts aggregator | 🔴 High |
+| 2 | Create test_fixture.ts and update spec to use it | 🔴 High |
+| 3 | Add test.step() to the spec | 🟡 Medium |
+| 4 | Introduce ICredential interface on login() | 🟡 Medium |
+| 5 | Replace CSS ID locators with getByLabel() | 🟡 Medium |
+| 6 | Replace button[type="submit"] with getByRole() | 🟡 Medium |
+| 7 | Delete example.spec.ts | 🟢 Low |
+
+The review will ask if it should implement the required changes, and with confirmation of that we get a nice neat outcome.
+We can compare this to the scripts we created previously and should see consistency between them.
+
+The main downside here is that copilot does not have access to the elements themselves.
+If complex xpaths have been used it is unlikely to be able to solve them accurately and will likely hallucinate them.
+This could be further improved upon by creating a refactoring skill which utilises the Playwright MCP to access the application under tests to find the elements and then create better playwright locators!
