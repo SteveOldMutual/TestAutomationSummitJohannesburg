@@ -6,6 +6,14 @@
 
 > The final selenium refactor can be covered live, if there is time.
 
+## Requirements
+
+- VSCode with Copilot enabled on github account
+- nodejs installed
+- git 
+- docker
+- The application used in the demo can be found [here](https://github.com/SteveOldMutual/automation-workshop-school) 
+
 ## What You Will Learn
 
 - How to refine recorded Codegen scripts into clean, maintainable Playwright tests
