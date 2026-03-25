@@ -13,6 +13,15 @@
 - How to conduct AI-assisted code reviews against your organisation's best practices
 - How to migrate an existing Selenium/WebdriverIO project to Playwright using Copilot
 
+## Branch Structure
+
+- main : This is the starting default point to work through the demo
+- pom-generated: A checkpoint after the first POM is generated using copilot
+- review-ai-generated: A chckpoint after the review of the POM has been completed
+- selenium-refactor-pre: This branch contains the selenium script for refactor
+- selenium-refactor-post: This branch contains the refactored and reviewed selenium script to playwright
+
+
 ---
 
 
